@@ -37,15 +37,43 @@ The config enforces a "dumb orchestrator + smart agents" pattern:
 - Context monitor injects warnings at 35% remaining (WARNING) and 25% remaining (CRITICAL)
 - Prevents agents from starting complex work when context is nearly exhausted
 
+## Prerequisites
+
+### Windows
+Claude Code on Windows requires **Git Bash**. If you see this error:
+```
+Error: Claude Code on Windows requires git-bash
+```
+
+1. Install Git for Windows from https://git-scm.com/downloads/win
+2. During installation, select **"Add to PATH"**
+3. If Git Bash is installed but not detected, set the environment variable:
+   ```powershell
+   # PowerShell (user-level, persists across sessions)
+   [Environment]::SetEnvironmentVariable("CLAUDE_CODE_GIT_BASH_PATH", "C:\Program Files\Git\bin\bash.exe", "User")
+   ```
+   Or via System Settings: **Settings > System > About > Advanced system settings > Environment Variables** — add `CLAUDE_CODE_GIT_BASH_PATH` with value `C:\Program Files\Git\bin\bash.exe`
+4. Restart your terminal after setting the variable
+
+> **Note**: On Windows, `~/.claude/` maps to `C:\Users\<YourName>\.claude\`. The install script runs in Git Bash.
+
+### macOS / Linux
+No special prerequisites — just ensure `node` (v18+) and `git` are installed.
+
 ## Installation
 
+### macOS / Linux
 ```bash
-# Clone the repo
 git clone https://github.com/liamfrazer/claude-code-config.git
 cd claude-code-config
-
-# Run the installer
 chmod +x install.sh
+./install.sh
+```
+
+### Windows (Git Bash)
+```bash
+git clone https://github.com/liamfrazer/claude-code-config.git
+cd claude-code-config
 ./install.sh
 ```
 
